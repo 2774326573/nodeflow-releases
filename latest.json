@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "product": "NodeFlow",
+  "channel": "stable",
+  "version": "1.0.0",
+  "tag": "v1.0.0",
+  "publishedAt": "2026-09-05T08:25:04Z",
+  "releaseUrl": "https://github.com/2774326573/nodeflow-releases/releases/tag/v1.0.0",
+  "platform": "windows-x64",
+  "recommendedBuild": "qt",
+  "assets": [
+    {
+      "id": "windows-x64-qt",
+      "build": "qt",
+      "recommended": true,
+      "fileName": "nodeflow_demo-1.0.0-win64-qt.zip",
+      "sizeBytes": 280621343,
+      "sha256": "9fe15c6a9182bf3a10b0a0186c90d13b3d175b61e9cda09103da787507a08865",
+      "downloadUrl": "https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/nodeflow_demo-1.0.0-win64-qt.zip"
+    },
+    {
+      "id": "windows-x64-msvc-wxwidgets",
+      "build": "msvc-wxwidgets",
+      "recommended": false,
+      "fileName": "nodeflow_demo-1.0.0-win64-msvc.zip",
+      "sizeBytes": 325719637,
+      "sha256": "1f8905efabf45a6b1372758ddbb43d51a20de96b21b36b6230e92cc8a6190082",
+      "downloadUrl": "https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/nodeflow_demo-1.0.0-win64-msvc.zip"
+    }
+  ],
+  "checksumUrl": "https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/SHA256SUMS.txt",
+  "thirdPartyNoticesUrl": "https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/THIRD-PARTY-NOTICES.txt",
+  "namingPolicy": {
+    "legacyThrough": "1.0.0",
+    "futurePatterns": [
+      "NodeFlow-vX.Y.Z-Windows-x64-Qt-Portable.zip",
+      "NodeFlow-vX.Y.Z-Windows-x64-wxWidgets-Portable.zip",
+      "NodeFlow-vX.Y.Z-Windows-x64-Setup.exe"
+    ]
+  }
+}
