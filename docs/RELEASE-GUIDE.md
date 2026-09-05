@@ -1,6 +1,6 @@
 # NodeFlow 发布指南
 
-**简体中文** · [English](RELEASE-GUIDE.en.md)
+[简体中文](RELEASE-GUIDE.md) · [English](RELEASE-GUIDE.en.md)
 
 本文档用于规范 NodeFlow 的公开二进制发布流程。
 
@@ -12,7 +12,7 @@ Windows Qt 版本建议使用**动态链接**，并随应用一起部署所需 Q
 
 ## 2. 推荐目录结构
 
-典型便携版可以采用：
+典型便携版：
 
 ```text
 NodeFlow/
@@ -60,16 +60,26 @@ windeployqt .\NodeFlow.exe
 THIRD-PARTY-NOTICES.txt
 ```
 
-## 5. 发布文件命名
+## 5. 正式文件命名
 
-推荐：
+v1.0.0 已发布资产保留原文件名，避免破坏公开 URL。
+
+**从后续版本开始统一使用正式产品名：**
 
 ```text
-NodeFlow-vX.Y.Z-Windows-x64-Setup.exe
-NodeFlow-vX.Y.Z-Windows-x64-Portable.zip
+NodeFlow-vX.Y.Z-Windows-x64-Qt-Portable.zip
+NodeFlow-vX.Y.Z-Windows-x64-wxWidgets-Portable.zip
 SHA256SUMS.txt
 THIRD-PARTY-NOTICES.txt
 ```
+
+如提供安装器：
+
+```text
+NodeFlow-vX.Y.Z-Windows-x64-Setup.exe
+```
+
+不要再使用 `nodeflow_demo-*` 作为新的公开发布文件名。
 
 大型安装包和 ZIP 应作为 **GitHub Release Assets** 上传，不要长期直接提交进 Git 历史。
 
@@ -78,8 +88,8 @@ THIRD-PARTY-NOTICES.txt
 PowerShell：
 
 ```powershell
-Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Setup.exe -Algorithm SHA256
-Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Portable.zip -Algorithm SHA256
+Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Qt-Portable.zip -Algorithm SHA256
+Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-wxWidgets-Portable.zip -Algorithm SHA256
 ```
 
 把结果写入：
@@ -88,15 +98,15 @@ Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Portable.zip -Algorithm SHA256
 SHA256SUMS.txt
 ```
 
-## 7. 版本命名
+## 7. 版本与兼容性
 
 推荐 Tag：
 
 ```text
-v0.1.0
-v0.2.0-beta.1
-v0.3.0-rc.1
-v1.0.0
+v1.0.1
+v1.1.0-beta.1
+v1.1.0-rc.1
+v2.0.0
 ```
 
 Release 标题：
@@ -104,6 +114,22 @@ Release 标题：
 ```text
 NodeFlow vX.Y.Z
 ```
+
+NodeFlow 已进入 `1.x` 公共版本线，因此默认遵循：
+
+- `PATCH`：修复问题，不破坏公开接口。
+- `MINOR`：增加向后兼容能力。
+- `MAJOR`：允许明确的 breaking changes。
+
+在 `1.x` 内应尽量保持这些公开边界兼容：
+
+- Workflow / Graph JSON
+- Plugin ABI/API
+- Port / 数据类型语义
+- 插件 Manifest / 元数据结构
+- 对外可见 Runtime 行为
+
+如必须破坏这些边界，应明确记录迁移方案，并优先进入新的 Major 版本。
 
 ## 8. Release Notes 模板
 
@@ -126,10 +152,12 @@ NodeFlow vX.Y.Z
 - Windows 10 / 11 x64
 - Qt runtime: ...
 - Plugin ABI/API: ...
+- Workflow schema: ...
 
 ## 下载
-- Setup installer
-- Portable ZIP
+- Qt Portable
+- wxWidgets Portable
+- Setup（如有）
 
 ## 校验
 参见 `SHA256SUMS.txt`。
@@ -138,9 +166,26 @@ NodeFlow vX.Y.Z
 - ...
 ```
 
-## 9. ONEWU 软件中心接入
+## 9. latest.json
 
-GitHub Release 发布并验证完成后，ONEWU Software Center 应保存对应 **Release Asset URL** 作为公开下载地址，而不是链接仓库中的普通 Git 文件。
+仓库根目录维护：
+
+```text
+latest.json
+```
+
+它作为 ONEWU 软件中心及其他客户端可读取的**机器可读稳定版本清单**，至少记录：
+
+- stable version / tag
+- 发布时间
+- 推荐构建
+- Release URL
+- 各平台资产 URL
+- 文件大小
+- SHA-256
+- 第三方声明 URL
+
+每次 Stable Release 发布完成后，必须同步更新 `latest.json`。
 
 推荐链路：
 
@@ -149,7 +194,7 @@ NodeFlow Build
       ↓
 GitHub Release
       ↓
-Release Asset URL
+latest.json
       ↓
 ONEWU Software Center
       ↓
@@ -165,4 +210,6 @@ ONEWU Software Center
 - [ ] 测试当前发布包包含的 Modbus / Serial / Vision 功能
 - [ ] 校验所有下载文件 SHA-256
 - [ ] 确认许可证和第三方声明存在
+- [ ] 更新 `latest.json`
+- [ ] 确认 Release Notes 中标出兼容性与 breaking changes
 - [ ] 确认没有源码、API Key、Secret、内部路径或私有配置泄漏
