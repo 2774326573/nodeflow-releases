@@ -12,13 +12,35 @@
 ![UI](https://img.shields.io/badge/UI-Qt-41CD52?style=flat-square)
 ![Vision](https://img.shields.io/badge/Vision-OpenCV-5C3EE8?style=flat-square)
 ![Protocol](https://img.shields.io/badge/Protocol-Modbus%20%7C%20Serial%20%7C%20HTTP-555555?style=flat-square)
-![Repository](https://img.shields.io/badge/Repository-Public%20Releases-181717?style=flat-square)
+![Release](https://img.shields.io/badge/Latest-v1.0.0-2ea44f?style=flat-square)
 
 <br/>
 
 **简体中文** · [**English**](README.en.md) · [**Releases**](../../releases) · [**发布指南**](docs/RELEASE-GUIDE.md)
 
 </div>
+
+---
+
+## 最新版本 · NodeFlow v1.0.0
+
+首个公开 Windows x64 二进制发行版已经发布。
+
+| 构建 | 推荐 | 说明 | 下载 |
+| --- | :---: | --- | --- |
+| **Qt 版** | ⭐ **默认推荐** | 当前主要 GUI 构建，解压即用 | [下载 Qt 版](https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/nodeflow_demo-1.0.0-win64-qt.zip) |
+| **MSVC / wxWidgets 版** | 兼容构建 | 便携版；WebView2 Runtime 由目标系统提供 | [下载 MSVC 版](https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/nodeflow_demo-1.0.0-win64-msvc.zip) |
+
+> **不知道选哪个？优先下载 Qt 版。**
+
+辅助文件：
+
+- [SHA256SUMS.txt](https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/SHA256SUMS.txt)
+- [THIRD-PARTY-NOTICES.txt](https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/THIRD-PARTY-NOTICES.txt)
+- [查看完整 Release Notes](https://github.com/2774326573/nodeflow-releases/releases/tag/v1.0.0)
+- [机器可读最新版本清单](latest.json)
+
+> v1.0.0 已发布资产继续保留现有文件名，避免破坏公开下载链接。**从后续版本开始采用正式 NodeFlow 命名规范**，不再使用 `nodeflow_demo` 作为发布文件名。
 
 ---
 
@@ -78,47 +100,48 @@ NodeFlow 的目标并不只是“画节点”，而是让节点图真正承担�
 
 > **NodeFlow 主源码在独立私有仓库中维护，本仓库不公开主源码。**
 
-## 下载
+## 后续发布文件命名
 
-正式版本通过 GitHub **Releases** 发布：
-
-➡️ **[前往 NodeFlow Releases](../../releases)**
-
-推荐的发布资产命名：
+从 v1.0.0 之后的版本开始，统一使用正式产品命名：
 
 ```text
-NodeFlow-vX.Y.Z-Windows-x64-Setup.exe
-NodeFlow-vX.Y.Z-Windows-x64-Portable.zip
+NodeFlow-vX.Y.Z-Windows-x64-Qt-Portable.zip
+NodeFlow-vX.Y.Z-Windows-x64-wxWidgets-Portable.zip
 SHA256SUMS.txt
 THIRD-PARTY-NOTICES.txt
 ```
 
-大型二进制安装包应作为 **GitHub Release Assets** 上传，而不是长期提交进 Git 历史。
+如后续提供安装器：
 
-## 版本规则
+```text
+NodeFlow-vX.Y.Z-Windows-x64-Setup.exe
+```
 
-NodeFlow 优先采用语义化版本风格：
+大型二进制安装包统一作为 **GitHub Release Assets** 发布，不直接提交进 Git 历史。
+
+## 版本与兼容性
+
+NodeFlow 使用语义化版本风格：
 
 ```text
 vMAJOR.MINOR.PATCH
 ```
 
+`1.x` 系列优先保持公开 Workflow、Graph Schema、插件接口和运行时行为的向后兼容。需要明显破坏兼容性的变更，应进入新的 Major 版本。
+
 预发布版本例如：
 
 ```text
-v0.3.0-beta.1
-v0.3.0-rc.1
+v1.1.0-beta.1
+v1.1.0-rc.1
 ```
 
 ## 文件完整性校验
 
-每个正式发布包建议同时提供 `SHA256SUMS.txt`。
-
 Windows PowerShell：
 
 ```powershell
-Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Setup.exe -Algorithm SHA256
-Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Portable.zip -Algorithm SHA256
+Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Qt-Portable.zip -Algorithm SHA256
 ```
 
 把输出结果与同一 Release 中的 `SHA256SUMS.txt` 对比即可。
