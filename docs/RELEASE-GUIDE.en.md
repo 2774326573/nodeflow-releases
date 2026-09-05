@@ -1,6 +1,6 @@
 # NodeFlow Release Guide
 
-[简体中文](RELEASE-GUIDE.md) · **English**
+[简体中文](RELEASE-GUIDE.md) · [English](RELEASE-GUIDE.en.md)
 
 This document defines the public binary release workflow for NodeFlow.
 
@@ -12,7 +12,7 @@ For Windows Qt builds, dynamic linking is recommended, with the required Qt runt
 
 ## 2. Recommended package layout
 
-A typical portable package may look like:
+A typical portable package:
 
 ```text
 NodeFlow/
@@ -44,7 +44,7 @@ Inspect the generated package manually afterwards.
 
 ## 4. Third-party license audit
 
-Before every public release, verify the licenses of at least:
+Before every public release, verify at least:
 
 - Qt modules actually shipped
 - Qt WebEngine / Chromium when enabled
@@ -60,16 +60,26 @@ Update:
 THIRD-PARTY-NOTICES.txt
 ```
 
-## 5. Distribution file names
+## 5. Formal asset naming
 
-Recommended:
+Existing v1.0.0 assets keep their current names to avoid breaking public URLs.
+
+**Starting with subsequent releases, use formal product names:**
 
 ```text
-NodeFlow-vX.Y.Z-Windows-x64-Setup.exe
-NodeFlow-vX.Y.Z-Windows-x64-Portable.zip
+NodeFlow-vX.Y.Z-Windows-x64-Qt-Portable.zip
+NodeFlow-vX.Y.Z-Windows-x64-wxWidgets-Portable.zip
 SHA256SUMS.txt
 THIRD-PARTY-NOTICES.txt
 ```
+
+If an installer is provided:
+
+```text
+NodeFlow-vX.Y.Z-Windows-x64-Setup.exe
+```
+
+Do not use new `nodeflow_demo-*` names for public release assets.
 
 Large installers and ZIP archives should be uploaded as **GitHub Release Assets** rather than committed permanently into Git history.
 
@@ -78,8 +88,8 @@ Large installers and ZIP archives should be uploaded as **GitHub Release Assets*
 PowerShell:
 
 ```powershell
-Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Setup.exe -Algorithm SHA256
-Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Portable.zip -Algorithm SHA256
+Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Qt-Portable.zip -Algorithm SHA256
+Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-wxWidgets-Portable.zip -Algorithm SHA256
 ```
 
 Record the results in:
@@ -88,15 +98,15 @@ Record the results in:
 SHA256SUMS.txt
 ```
 
-## 7. Version naming
+## 7. Versioning and compatibility
 
 Recommended tags:
 
 ```text
-v0.1.0
-v0.2.0-beta.1
-v0.3.0-rc.1
-v1.0.0
+v1.0.1
+v1.1.0-beta.1
+v1.1.0-rc.1
+v2.0.0
 ```
 
 Release title:
@@ -104,6 +114,22 @@ Release title:
 ```text
 NodeFlow vX.Y.Z
 ```
+
+NodeFlow is now on a public `1.x` line, so the default policy is:
+
+- `PATCH`: fixes without breaking public interfaces.
+- `MINOR`: backward-compatible feature additions.
+- `MAJOR`: may contain explicit breaking changes.
+
+Within `1.x`, preserve compatibility wherever practical for:
+
+- Workflow / Graph JSON
+- Plugin ABI/API
+- Port and data-type semantics
+- Plugin Manifest / metadata structures
+- Publicly observable runtime behavior
+
+If a public boundary must break, document a migration path and prefer a new major version.
 
 ## 8. Release Notes template
 
@@ -126,10 +152,12 @@ NodeFlow vX.Y.Z
 - Windows 10 / 11 x64
 - Qt runtime: ...
 - Plugin ABI/API: ...
+- Workflow schema: ...
 
 ## Downloads
-- Setup installer
-- Portable ZIP
+- Qt Portable
+- wxWidgets Portable
+- Setup (if available)
 
 ## Verification
 See `SHA256SUMS.txt`.
@@ -138,9 +166,26 @@ See `SHA256SUMS.txt`.
 - ...
 ```
 
-## 9. ONEWU Software Center integration
+## 9. latest.json
 
-After a GitHub Release has been published and verified, ONEWU Software Center should use the corresponding **Release Asset URL** as its public download source rather than linking to ordinary files committed to Git.
+The repository root maintains:
+
+```text
+latest.json
+```
+
+It is the **machine-readable stable release manifest** consumed by ONEWU Software Center and other clients. It should contain at least:
+
+- stable version / tag
+- publish time
+- recommended build
+- Release URL
+- platform asset URLs
+- file sizes
+- SHA-256 values
+- third-party notices URL
+
+After every Stable Release is published, `latest.json` must be updated.
 
 Recommended flow:
 
@@ -149,7 +194,7 @@ NodeFlow Build
       ↓
 GitHub Release
       ↓
-Release Asset URL
+latest.json
       ↓
 ONEWU Software Center
       ↓
@@ -165,4 +210,6 @@ User Download
 - [ ] Test Modbus / Serial / Vision features included in the package
 - [ ] Verify SHA-256 for every downloadable file
 - [ ] Verify license and attribution files are present
+- [ ] Update `latest.json`
+- [ ] Document compatibility and breaking changes in Release Notes
 - [ ] Confirm no source code, API keys, secrets, internal paths or private configuration files are included
