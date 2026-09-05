@@ -12,13 +12,35 @@
 ![UI](https://img.shields.io/badge/UI-Qt-41CD52?style=flat-square)
 ![Vision](https://img.shields.io/badge/Vision-OpenCV-5C3EE8?style=flat-square)
 ![Protocol](https://img.shields.io/badge/Protocol-Modbus%20%7C%20Serial%20%7C%20HTTP-555555?style=flat-square)
-![Repository](https://img.shields.io/badge/Repository-Public%20Releases-181717?style=flat-square)
+![Release](https://img.shields.io/badge/Latest-v1.0.0-2ea44f?style=flat-square)
 
 <br/>
 
 [**简体中文**](README.md) · **English** · [**Releases**](../../releases) · [**Release Guide**](docs/RELEASE-GUIDE.en.md)
 
 </div>
+
+---
+
+## Latest Release · NodeFlow v1.0.0
+
+The first public Windows x64 binary release is now available.
+
+| Build | Recommendation | Description | Download |
+| --- | :---: | --- | --- |
+| **Qt build** | ⭐ **Default** | Primary GUI build, portable and ready to run after extraction | [Download Qt build](https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/nodeflow_demo-1.0.0-win64-qt.zip) |
+| **MSVC / wxWidgets build** | Compatibility build | Portable package; WebView2 Runtime is provided by the target system | [Download MSVC build](https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/nodeflow_demo-1.0.0-win64-msvc.zip) |
+
+> **Not sure which one to use? Choose the Qt build.**
+
+Supporting files:
+
+- [SHA256SUMS.txt](https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/SHA256SUMS.txt)
+- [THIRD-PARTY-NOTICES.txt](https://github.com/2774326573/nodeflow-releases/releases/download/v1.0.0/THIRD-PARTY-NOTICES.txt)
+- [Full Release Notes](https://github.com/2774326573/nodeflow-releases/releases/tag/v1.0.0)
+- [Machine-readable latest release manifest](latest.json)
+
+> Existing v1.0.0 asset names are intentionally preserved to avoid breaking public download URLs. **Future releases use formal NodeFlow asset names** instead of the `nodeflow_demo` prefix.
 
 ---
 
@@ -80,47 +102,48 @@ It is used for:
 
 > **The main NodeFlow source code is maintained separately and is not published in this repository.**
 
-## Downloads
+## Release asset naming
 
-Official binaries are distributed through GitHub **Releases**:
-
-➡️ **[Open NodeFlow Releases](../../releases)**
-
-Recommended asset names:
+Starting with releases after v1.0.0, use formal product names:
 
 ```text
-NodeFlow-vX.Y.Z-Windows-x64-Setup.exe
-NodeFlow-vX.Y.Z-Windows-x64-Portable.zip
+NodeFlow-vX.Y.Z-Windows-x64-Qt-Portable.zip
+NodeFlow-vX.Y.Z-Windows-x64-wxWidgets-Portable.zip
 SHA256SUMS.txt
 THIRD-PARTY-NOTICES.txt
 ```
 
-Large binaries should be attached as **GitHub Release Assets** instead of being committed permanently into Git history.
+If an installer is provided later:
 
-## Versioning
+```text
+NodeFlow-vX.Y.Z-Windows-x64-Setup.exe
+```
 
-NodeFlow uses semantic-style versions where practical:
+Large binaries are distributed as **GitHub Release Assets** and should not be committed directly into Git history.
+
+## Versioning and compatibility
+
+NodeFlow uses semantic-style versions:
 
 ```text
 vMAJOR.MINOR.PATCH
 ```
 
+The `1.x` line should preserve backward compatibility for published workflows, graph schemas, plugin interfaces and runtime behavior wherever practical. Clearly breaking changes should move to a new major version.
+
 Pre-release examples:
 
 ```text
-v0.3.0-beta.1
-v0.3.0-rc.1
+v1.1.0-beta.1
+v1.1.0-rc.1
 ```
 
 ## Integrity verification
 
-Every official binary should be distributed with a SHA-256 checksum.
-
 On Windows PowerShell:
 
 ```powershell
-Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Setup.exe -Algorithm SHA256
-Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Portable.zip -Algorithm SHA256
+Get-FileHash .\NodeFlow-vX.Y.Z-Windows-x64-Qt-Portable.zip -Algorithm SHA256
 ```
 
 Compare the result with `SHA256SUMS.txt` from the same release.
