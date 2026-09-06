@@ -1,0 +1,67 @@
+NodeFlow 第三方组件声明(合并版)/ Third-Party Notices (combined)
+================================================================
+NodeFlow Demo 1.0.0 · 覆盖 nodeflow_demo-1.0.0-win64-qt.zip 与
+nodeflow_demo-1.0.0-win64-msvc.zip 两个发行包 · 生成于 2026-09-05
+
+各发行包内的 licenses/ 目录已包含对应许可证全文与本声明的分包版本。
+
+----------------------------------------------------------------
+一、qt 构建便携包(nodeflow_demo-1.0.0-win64-qt.zip)
+----------------------------------------------------------------
+
+1. Qt 5(含 Qt WebEngine / Chromium、ANGLE 等)
+   版权 © The Qt Company Ltd 及贡献者、Chromium 各组件版权人
+   许可:GNU LGPL-3.0(Qt 双许可中的 LGPL 路线);Chromium 组件为 BSD 风格许可
+   文本:licenses/Qt-LICENSE.txt、licenses/LGPL-3.0.txt、licenses/GPL-3.0.txt
+   源码:https://download.qt.io/
+
+2. OpenCV 4.12.0(opencv_world4120.dll)
+   版权 © OpenCV 团队;许可:Apache License 2.0
+   文本:licenses/Apache-2.0.txt;源码:https://github.com/opencv/opencv
+
+3. FFmpeg(包含于 opencv_videoio_ffmpeg4120_64.dll 的视频解码组件)
+   许可:GNU LGPL-2.1-or-later(OpenCV 官方构建配置);源码:https://ffmpeg.org
+
+4. Python 3.8(python.exe、python38.dll、python38.zip、python3.dll 等)
+   版权 © Python Software Foundation;许可:PSF License
+   文本:licenses/PSF-LICENSE.txt;源码:https://www.python.org/downloads/source/
+
+5. LLVM compiler-rt 运行时(clang_rt.asan_dynamic-x86_64.dll)
+   版权 © LLVM 项目;许可:Apache-2.0 WITH LLVM-exception
+   文本:licenses/Apache-2.0.txt;源码:https://github.com/llvm/llvm-project
+
+6. SQLite(sqlite3.dll)
+   公有领域(Public Domain);https://www.sqlite.org/copyright.html
+
+7. Microsoft Visual C++ 运行库(msvcp140.dll、vcruntime140.dll、vcruntime140_1.dll)
+   版权 © Microsoft;按 Microsoft Visual C++ 可再分发组件许可条款分发
+   https://learn.microsoft.com/cpp/windows/latest-supported-vc-redist
+
+----------------------------------------------------------------
+二、msvc 构建便携包(nodeflow_demo-1.0.0-win64-msvc.zip)
+----------------------------------------------------------------
+
+1. wxWidgets 3.3.2 定制构建(wxbase332u_*.dll、wxmsw332u_*.dll)
+   版权 © Julian Smart、Robert Roebling et al.
+   许可:wxWindows Library Licence(LGPL-2.0-or-later 附加静态链接例外条款)
+   文本:licenses/wxWidgets-LICENSE.txt;源码:https://github.com/wxWidgets/wxWidgets
+
+2. OpenCV 4.12.0 / FFmpeg —— 同上第 2、3 条(Apache-2.0 / LGPL-2.1-or-later)
+
+3. OpenSSL 3(libcrypto-3-x64.dll)
+   版权 © OpenSSL 项目;许可:Apache License 2.0
+   文本:licenses/Apache-2.0.txt;源码:https://www.openssl.org/source/
+
+4. Python 3.14(python314.dll、python3.dll、python/、python314._pth 等)
+   版权 © Python Software Foundation;许可:PSF License
+   文本:licenses/PSF-LICENSE.txt;源码:https://www.python.org/downloads/source/
+
+5. Microsoft Edge WebView2 Loader(WebView2Loader.dll)
+   版权 © Microsoft;按 Microsoft Edge WebView2 SDK 许可条款分发
+   https://learn.microsoft.com/microsoft-edge/webview2/
+
+6. Microsoft Visual C++ 运行库 —— 同上第 7 条
+
+----------------------------------------------------------------
+NodeFlow 程序本体、nodeflow.lic 授权机制、docs/examples 等随包内容归
+NodeFlow 项目所有,授权条款以随包 README 及授权协议为准。

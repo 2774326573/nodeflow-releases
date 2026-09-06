@@ -1,0 +1,3 @@
+# 大型二进制走 GitHub Releases Assets,不进 git 历史
+*.zip
+*.exe
